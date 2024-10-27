@@ -1,0 +1,24 @@
+<!--  blog/templates/blog/detail.html -->
+
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2 class="text-center m-5 fw-bold">{{ post.title }}</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    <div class="container text-start">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h3 class="mb-4 mt-4"><a class="fst-italic">{{ post.title }}</a></h3>
+                <p>{{ post.body }}</p>
+                <small class="post-footer">
+                    {{ post.created_on.date }} | <span class="fw-bold">Tags:</span>
+                    {% for category in post.categories.all %}
+                        <a href="{% url 'blog_category' category.name %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </small>
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}
